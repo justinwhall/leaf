@@ -1,8 +1,9 @@
 import Layout from '@/components/layout';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Head from 'next/head';
+import Image from 'next/image';
 
-export default function Home() {
+export default function Categories() {
   return (
     <Layout loading={false}>
       <Head>
@@ -11,7 +12,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Button variant="contained" color="primary">Home</Button>
+      <Typography variant="h1">Categories</Typography>
     </Layout>
   );
 }
