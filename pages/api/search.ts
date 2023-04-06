@@ -7,9 +7,9 @@ export default async function handler(
 ) {
   let news;
   try {
-    news = await proxyRequest(`/top-headlines?country=${req.query.locale as string}`);
+    news = await proxyRequest(`/everything?language=${req.query.language as string}&q=${req.query.q as string}`);
   } catch (error) {
-    return res.status(500).json({ ERROR: 'NEWS_FETCH_ERROR' });
+    return res.status(500).json({ ERROR: 'SEARCH_NEWS_ERROR' });
   }
   return res.status(200).json(news);
 }

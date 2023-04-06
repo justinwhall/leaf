@@ -7,6 +7,8 @@ import Articles from '@/components/articles';
 import Layout from '@/components/layout';
 import { fetchNews, proxyRequest } from '@/services';
 import { GetServerSideProps } from 'next';
+import { Typography } from '@mui/material';
+import { LOCALE_NAMES } from '@/constants';
 
 export default function Home({ initialArticles }: { initialArticles: NewsResponse }) {
   const [activeArticle, setActiveArticle] = useState<null | Article>(null);
@@ -16,7 +18,7 @@ export default function Home({ initialArticles }: { initialArticles: NewsRespons
     data, isError, isFetching,
   } = useQuery(
     [locale],
-    async () => fetchNews(locale as string),
+    async () => fetchNews(`/api/news?locale=${locale as string}`),
     {
       // Don't refetch if we have it in cache.
       staleTime: 60 * 60 * 1000,
@@ -34,6 +36,14 @@ export default function Home({ initialArticles }: { initialArticles: NewsRespons
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Typography variant="h2" component="h1" gutterBottom>
+        {' '}
+        Top News in
+        {' '}
+        {LOCALE_NAMES[locale as string]}
+        {' '}
+      </Typography>
+
       {data?.articles && !activeArticle && (
         <Articles articles={data.articles} setActiveArticle={setActiveArticle} />
       )}
@@ -47,7 +57,7 @@ export default function Home({ initialArticles }: { initialArticles: NewsRespons
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   // Server render the first page of articles
-  const initialArticles = await proxyRequest(locale as string);
+  const initialArticles = await proxyRequest(`/top-headlines?country=${locale as string}`);
 
   return {
     props: {

@@ -2,14 +2,15 @@
 import { API_URL } from '@/constants';
 
 /**
- * Given a locale, fetches news from newapi.org for the given locale
- * @param locale the locale to fetch news for
+ * Given a uri, fetches news from newapi.org for the given locale
+ * @param uri the url to fetch news for
  * @returns the news response object from newapi.org
  */
-export async function proxyRequest(locale: string): Promise<NewsResponse> {
+export async function proxyRequest(uri: string): Promise<NewsResponse> {
+  console.log(`${API_URL}${uri}&apiKey=${process.env.API_KEY}`);
   let data;
   try {
-    const response = await fetch(`${API_URL}/top-headlines?country=${locale}&apiKey=${process.env.API_KEY}`, {
+    const response = await fetch(`${API_URL}${uri}&apiKey=${process.env.API_KEY}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -23,14 +24,14 @@ export async function proxyRequest(locale: string): Promise<NewsResponse> {
 }
 
 /**
- * Given a locale, fetches news from the next news api route for the given locale
- * @param locale the locale to fetch news for
- * @returns the news response object from newapi.org
+ * Given a uri, fetches news from the NEXTJS news api route
+ * @param uri the uri to fetch news for
+ * @returns the news response object from newsapi.org
  */
-export async function fetchNews(locale: string): Promise<NewsResponse> {
+export async function fetchNews(uri: string): Promise<NewsResponse> {
   let data;
   try {
-    const response = await fetch(`/api/news?locale=${locale}`, {
+    const response = await fetch(uri, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
