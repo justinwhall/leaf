@@ -7,7 +7,6 @@ import { API_URL } from '@/constants';
  * @returns the news response object from newapi.org
  */
 export async function proxyRequest(uri: string): Promise<NewsResponse> {
-  console.log(`${API_URL}${uri}&apiKey=${process.env.API_KEY}`);
   let data;
   try {
     const response = await fetch(`${API_URL}${uri}&apiKey=${process.env.API_KEY}`, {

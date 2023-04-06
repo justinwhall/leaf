@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -10,7 +10,9 @@ import { GetServerSideProps } from 'next';
 import { Typography } from '@mui/material';
 import { LOCALE_NAMES } from '@/constants';
 
-export default function Home({ initialArticles }: { initialArticles: NewsResponse }) {
+export default function Home(
+  { initialArticles, initialLocale }: { initialArticles: NewsResponse, initialLocale: string },
+) {
   const [activeArticle, setActiveArticle] = useState<null | Article>(null);
   const { locale } = useRouter();
 
@@ -21,9 +23,9 @@ export default function Home({ initialArticles }: { initialArticles: NewsRespons
     async () => fetchNews(`/api/news?locale=${locale as string}`),
     {
       // Don't refetch if we have it in cache.
-      staleTime: 60 * 60 * 1000,
-      cacheTime: 60 * 60 * 1000,
-      placeholderData: initialArticles,
+      staleTime: 60 * 3000,
+      cacheTime: 60 * 3000,
+      initialData: initialLocale === locale ? initialArticles : undefined,
     },
   );
 
@@ -62,6 +64,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
       initialArticles,
+      initialLocale: locale,
     },
   };
 };

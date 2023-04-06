@@ -24,8 +24,8 @@ export default function Search() {
     [locale, debouncedSearchQuery],
     async () => fetchNews(`/api/search?language=${lang}&q=${debouncedSearchQuery}`),
     {
-      // Don't refetch if we have it in cache.
       enabled: debouncedSearchQuery.length > 0,
+      // Don't refetch if we have it in cache.
       staleTime: 60 * 60 * 1000,
       cacheTime: 60 * 60 * 1000,
     },
@@ -39,17 +39,19 @@ export default function Search() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box my={3} textAlign="center">
-        <Typography variant="h2" component="h1">Search News</Typography>
-        <TextField
-          label="Search"
-          type="text"
-          variant="filled"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          sx={{ minWidth: 300 }}
-        />
-      </Box>
+      {!activeArticle && (
+        <Box my={3} textAlign="center">
+          <Typography variant="h2" component="h1">Search News</Typography>
+          <TextField
+            label="Search"
+            type="text"
+            variant="filled"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            sx={{ minWidth: 300 }}
+          />
+        </Box>
+      )}
 
       {data?.articles && data.articles.length === 0 && (
         <Typography variant="h3">No results found</Typography>
