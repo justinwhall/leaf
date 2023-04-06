@@ -4,7 +4,6 @@ type NavItem = {
 };
 
 export const API_URL = 'https://newsapi.org/v2';
-export const API_KEY = 'ffeee91983414084972e71cab438496e';
 
 export const NAV_ITEMS: NavItem[] = [
   {
@@ -33,16 +32,11 @@ export const CATEGORIES = [
 
 export const DEFAULT_LOCALE = 'en';
 
-export const LOCALE_NAMES = {
-  en: 'English',
+export const LOCALE_NAMES: { [key: string]: string } = {
+  us: 'English (US)',
   gb: 'English (UK)',
   fr: 'Français',
   de: 'Deutsch',
-  es: 'Español',
-  it: 'Italiano',
-  pt: 'Português',
   ru: 'Русский',
-  zh: '中文',
-  ja: '日本語',
   ar: 'العربية',
 };

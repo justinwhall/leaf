@@ -1,11 +1,9 @@
 import { NAV_ITEMS } from '@/constants';
-import { Button, Grid, useTheme } from '@mui/material';
+import { Grid } from '@mui/material';
 import Link from 'next/link';
 import LocaleSelect from './locale-select';
 
-export default function Header() {
-  // const theme = useTheme();
-
+export default function Header(): JSX.Element {
   return (
     <Grid
       container

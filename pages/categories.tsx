@@ -1,7 +1,6 @@
 import Layout from '@/components/layout';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import Head from 'next/head';
-import Image from 'next/image';
 
 export default function Categories() {
   return (
@@ -13,6 +12,7 @@ export default function Categories() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Typography variant="h1">Categories</Typography>
+      <div>Lorem ipsum...</div>
     </Layout>
   );
 }

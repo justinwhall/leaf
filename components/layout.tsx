@@ -1,9 +1,28 @@
 import Header from '@/components/header';
-import { Box, Container } from '@mui/material';
+import {
+  Box, CircularProgress, Container, Typography,
+} from '@mui/material';
 
-export default function Layout(
-  { children, loading }: { children: React.ReactNode, loading?: boolean },
-) {
+export default function Layout({
+  children,
+  loading,
+  error,
+}: {
+  children: React.ReactNode,
+  loading?: boolean,
+  error?: boolean
+}): JSX.Element {
+  if (error) {
+    return (
+      <Container maxWidth="lg">
+        <Header />
+        <Typography variant="h2" component="h1" gutterBottom>
+          Oops, something went wrong.
+        </Typography>
+      </Container>
+    );
+  }
+
   return (
     <Container maxWidth="lg">
       <Header />
@@ -17,8 +36,7 @@ export default function Layout(
             width: '100%',
           }}
         >
-          loading
-          {/* <Loading /> */}
+          <CircularProgress />
         </Box>
       ) : children}
     </Container>
@@ -26,5 +44,6 @@ export default function Layout(
 }
 
 Layout.defaultProps = {
+  error: false,
   loading: false,
 };
