@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=18.15.0",
+    "npm": ">=9.5.0"
+  },
   "dependencies": {
     "@emotion/cache": "^11.10.7",
     "@emotion/react": "^11.10.6",
